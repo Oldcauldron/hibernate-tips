@@ -26,6 +26,7 @@ public class PersistentHelper {
 
     public static EntityManager getEntityManager(Class[] persistentClasses) {
 
+
         switch (USED_DB) {
             case MYSQL:
                 initMysqlInnoDbOption();
@@ -54,14 +55,18 @@ public class PersistentHelper {
     }
 
     private static void initMysqlInnoDbOption() {
-        options.put(DRIVER, "com.mysql.jdbc.Driver");
-        options.put(URL, "jdbc:mysql://localhost:3306/hibernate_examples?characterEncoding=UTF-8&useUnicode=true&useSSL=false&serverTimezone=UTC");
+//        options.put(DRIVER, "com.mysql.jdbc.Driver");
+        options.put(DRIVER, "com.mysql.cj.jdbc.Driver");
+        options.put(URL, "jdbc:mysql://localhost:3306/hibernate_examples?characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC");
 //        options.put(DIALECT, "org.hibernate.dialect.MySQL5Dialect");
-        options.put(DIALECT, "org.hibernate.dialect.MySQL5InnoDBDialect");
+//        options.put(DIALECT, "org.hibernate.dialect.MySQL5InnoDBDialect");
+        options.put(DIALECT, "org.hibernate.dialect.MySQL8Dialect");
         options.put(USER, "root");
         options.put(PASS, "root");
         options.put(HBM2DDL_AUTO, "create-drop");
+//        options.put(HBM2DDL_AUTO, "create");
         options.put(SHOW_SQL, true);
+        options.put(FORMAT_SQL, true);
     }
 
     private static void initPostgreSQLOption() {

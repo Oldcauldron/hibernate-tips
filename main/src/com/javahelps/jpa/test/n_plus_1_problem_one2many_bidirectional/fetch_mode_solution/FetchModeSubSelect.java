@@ -183,7 +183,7 @@ public class FetchModeSubSelect {
     @Table(name = "stock_daily_record")
     private static class StockDailyRecord {
         @Id
-        @GeneratedValue
+        @GeneratedValue(strategy = GenerationType.AUTO)
         private long id;
 
         //невозможно использовать эту аннотацию на стороне ToOne
@@ -224,7 +224,7 @@ public class FetchModeSubSelect {
     private static class Stock implements Serializable {
 
         @Id
-        @GeneratedValue
+        @GeneratedValue(strategy = GenerationType.AUTO)
         private long id;
 
         @Fetch(FetchMode.SUBSELECT)

@@ -76,9 +76,6 @@ public class LostUpdate {
 
         entityManager.getTransaction().begin();
 
-        //На выходе получаем itemAmount 4, вместо 0, т.к. Антон фактически забрал все продукты
-        //Последним редактором будет Иван, хотя Антон начал действовать позже.
-        //Информация о действиях Антона и результаты этих действий будут утеряны, а Иван получит несуществующую единицу продукта
         Product product = entityManager.find(Product.class, 1L);
         System.out.println(product.getItemAmount());
         System.out.println(product.getLastUpdater());

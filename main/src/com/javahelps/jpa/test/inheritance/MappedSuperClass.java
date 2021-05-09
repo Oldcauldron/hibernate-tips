@@ -261,6 +261,7 @@ public class MappedSuperClass {
         }
     }
 
+    @SuppressWarnings("JpaMissingIdInspection")
     @Entity
     static class Manager extends Employee {
 
@@ -295,6 +296,7 @@ public class MappedSuperClass {
         }
     }
 
+    @SuppressWarnings("JpaMissingIdInspection")
     @Entity
     static class Expert extends Employee {
 

@@ -10,9 +10,7 @@ public class MergeSolution {
     public static void main(String[] args) {
         EntityManager entityManager = PersistentHelper.getEntityManager(new Class[] {Post.class, PostComment.class});
         saveData(entityManager);
-
         entityManager.clear();
-
         entityManager.getTransaction().begin();
 
         Post post = entityManager.find(Post.class, 1L);
@@ -20,19 +18,38 @@ public class MergeSolution {
 
         entityManager.getTransaction().commit();
         entityManager.close();
+        printPost(post, 1);
 
 
         entityManager = PersistentHelper.getEntityManager(new Class[] {Post.class, PostComment.class});
-
         entityManager.getTransaction().begin();
 
         post.setTitle("Post 1 changed");
         post.getPostComments().get(0).setReview("Comment 1 changed");
 
         entityManager.merge(post);
-
         entityManager.getTransaction().commit();
+        printPost(post, 2);
 
+
+        entityManager = PersistentHelper.getEntityManager(new Class[] {Post.class, PostComment.class});
+        saveData(entityManager);
+        entityManager.clear();
+
+        entityManager.getTransaction().begin();
+        post = entityManager.find(Post.class, 1L);
+        entityManager.getTransaction().commit();
+        printPost(post, 3);
+
+
+
+    }
+
+    public static void printPost(Post post, int i) {
+        StringBuilder str = new StringBuilder();
+        str.append("\n\n").append(i).append(".......................\n");
+        post.getPostComments().forEach(x -> str.append(x.toString()).append("\n"));
+        System.out.println(str);
     }
 
     public static void saveData(EntityManager entityManager) {

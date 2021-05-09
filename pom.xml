@@ -75,10 +75,16 @@
 			<version>3.20.0-GA</version>
 		</dependency>
 
+<!--		<dependency>-->
+<!--			<groupId>mysql</groupId>-->
+<!--			<artifactId>mysql-connector-java</artifactId>-->
+<!--			<version>5.1.36</version>-->
+<!--		</dependency>-->
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.36</version>
+			<version>8.0.24</version>
 		</dependency>
 
 		<dependency>

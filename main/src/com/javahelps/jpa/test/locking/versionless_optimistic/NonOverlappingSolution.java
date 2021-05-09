@@ -42,7 +42,7 @@ public class NonOverlappingSolution {
             entityManager2.getTransaction().commit();
         }
 
-        {//Не меняем itemAmount, но всё равно получаем ошибку
+        {
             entityManager.getTransaction().commit();
         }
 

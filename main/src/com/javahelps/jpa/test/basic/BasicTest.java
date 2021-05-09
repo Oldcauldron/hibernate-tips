@@ -50,6 +50,7 @@ public class BasicTest {
     @NoArgsConstructor
     @Getter
     @Setter
+    @Table(name = "post")
     static class Post {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
