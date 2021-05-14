@@ -71,7 +71,7 @@ public class FetchModeSubSelect {
             System.out.println();
 
             for (Stock stock : list) {
-
+                System.out.println("1...................for (Stock stock : list)");
                 for (StockDailyRecord stockDailyRecord : stock.getStockDailyRecords()) {
                     System.out.println(stockDailyRecord.getId());
                 }

@@ -49,7 +49,7 @@ public class SingleTable {
             entityManager.getTransaction().begin();
 
             List<Manager> employees =
-                    entityManager.createQuery("FROM " + Manager.class.getName() + " m JOIN FETCH m.experts", Manager.class).getResultList();
+                    entityManager.createQuery("FROM " + Manager.class.getName() + " m JOIN FETCH m.supervisors", Manager.class).getResultList();
 
             employees.forEach(System.out::println);
 
@@ -313,7 +313,7 @@ public class SingleTable {
     static class Manager extends Employee {
 
         @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, orphanRemoval = true)
-        private List<Expert> experts = new ArrayList<>();
+        private List<Expert> supervisors = new ArrayList<>();
 
         public Manager() {
             super();
@@ -325,21 +325,21 @@ public class SingleTable {
 
         //заводим специальные методы для добавления и удаления, которые позволяют избавиться от повторного кода
         public void addExpert(Expert expert) {
-            this.experts.add(expert);
+            this.supervisors.add(expert);
             expert.setManager(this);
         }
 
         public void removeExpert(Expert expert) {
-            this.experts.remove(expert);
+            this.supervisors.remove(expert);
             expert.setManager(null);
         }
 
         public List<Expert> getExperts() {
-            return experts;
+            return supervisors;
         }
 
-        public void setExperts(List<Expert> experts) {
-            this.experts = experts;
+        public void setExperts(List<Expert> supervisors) {
+            this.supervisors = supervisors;
         }
     }
 

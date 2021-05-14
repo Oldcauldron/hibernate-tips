@@ -16,7 +16,8 @@ import static org.hibernate.cfg.AvailableSettings.*;
 
 public class PersistentHelper {
 
-    private static final DB USED_DB = DB.MYSQL;
+//    private static final DB USED_DB = DB.MYSQL;
+    private static DB USED_DB = DB.MYSQL;
 
     private static final Map<String, Object> options = new HashMap<>();
     private static EntityManager entityManager;
@@ -54,6 +55,11 @@ public class PersistentHelper {
         return entityManager;
     }
 
+    public static EntityManager getEntityManager(Class[] persistentClasses, DB db) {
+        USED_DB = db;
+        return getEntityManager(persistentClasses);
+    }
+
     private static void initMysqlInnoDbOption() {
 //        options.put(DRIVER, "com.mysql.jdbc.Driver");
         options.put(DRIVER, "com.mysql.cj.jdbc.Driver");
@@ -65,8 +71,9 @@ public class PersistentHelper {
         options.put(PASS, "root");
         options.put(HBM2DDL_AUTO, "create-drop");
 //        options.put(HBM2DDL_AUTO, "create");
-        options.put(SHOW_SQL, true);
+//        options.put(SHOW_SQL, true);
         options.put(FORMAT_SQL, true);
+        options.put(USE_SQL_COMMENTS, true);
     }
 
     private static void initPostgreSQLOption() {
@@ -76,8 +83,12 @@ public class PersistentHelper {
         options.put(DIALECT, "org.hibernate.dialect.PostgreSQL95Dialect");
         options.put(USER, "postgres");
         options.put(PASS, "postgres");
-        options.put(HBM2DDL_AUTO, "create");
-        options.put(SHOW_SQL, true);
+//        options.put(HBM2DDL_AUTO, "create");
+        options.put(HBM2DDL_AUTO, "create-drop");
+//        options.put(SHOW_SQL, true);
+//        options.put(SHOW_SQL, false);
+        options.put(FORMAT_SQL, true);
+        options.put(USE_SQL_COMMENTS, true);
 
         options.put(STATEMENT_BATCH_SIZE, "20");
         options.put(ORDER_INSERTS, "true");
@@ -86,12 +97,17 @@ public class PersistentHelper {
         options.put(GENERATE_STATISTICS, "true");
     }
 
-    private enum DB {
+//    private enum DB {
+//        MYSQL,
+//        POSTGRESQL
+//    }
+    public enum DB {
         MYSQL,
         POSTGRESQL
-    }
+}
 
     public static void setIsolationLevel(IsolationLevel isolationLevel) {
         options.put("hibernate.connection.isolation", isolationLevel.getValue());
     }
+
 }

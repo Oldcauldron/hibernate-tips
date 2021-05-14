@@ -74,7 +74,7 @@ public class PostComment {
         return "PostComment{" +
                 "id=" + id +
                 ", review='" + review + '\'' +
-                ", post=" + post +
+                ", post_id=" + post.getId() +
                 '}';
     }
 }
